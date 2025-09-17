@@ -21,3 +21,7 @@ li {
   color: rgb(255, 255, 255);
   background-color: rgb(39, 85, 125);
 }
+
+#remove-button{
+  background-color: red;
+}

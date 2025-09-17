@@ -113,12 +113,40 @@ const handleFighter = (pickedFighter) => {
 }
 
 
+//totalstrength
+
+let totalstrength = 0;
+const sumTeamStrength = team.map((fighter) => {
+  totalstrength += fighter.strength;
+  return totalstrength;
+});
+
+//totalagility
+
+let totalAgility = 0;
+const sumTeamAgility = team.map((fighter) => {
+  totalAgility += fighter.agility;
+  return totalAgility;
+});
 
 
+//handleRemoveFighter
+
+const handleRemoveFighter = (removedFighter) => {
+  const updateTeam = team.filter(fighter => fighter.id !==removedFighter.id);
+  setTeam(updateTeam);
+  const returnFighter = [...zombieFighters, removedFighter];
+  setZombieFighters(returnFighter);
+  const refundMoney = money + removedFighter.price;
+  setMoney(refundMoney);
+};
 
   return (
     <>
     <h1>Zombie Fighter!</h1>
+    <h3>Money Left: <span>{money}</span></h3>
+    <h3>Team Total Strength: {totalstrength} </h3>
+    <h3>Team Total Agility: {totalAgility} </h3>
     {team.length > 0 ? (
      <> 
      <h2>Your Team: </h2>
@@ -128,14 +156,19 @@ const handleFighter = (pickedFighter) => {
           <div>
             <img src={fighter.img} />
             <p>{fighter.name}</p>
+            <p><span>Price: </span>{fighter.price}</p>
+            <p><span>Strength: </span>{fighter.strength}</p>
+            <p><span>Agility: </span>{fighter.agility}</p>
+            <button onClick={() => handleRemoveFighter(fighter)} className="remove-button" id="remove-button">Remove From Team</button> 
           </div>
         </li>
       ))}
     </ul>
     </>) 
-    : ( <h2>"Pick Your Team"</h2> )}
+    : 
+    ( <h2>"Pick Your Team"</h2> )}
 
-    <h3>Money Left: <span>{money}</span></h3>
+    <h3>Fighters: </h3>  
     <ul>
       {zombieFighters.map((fighter) => (
         <li key={fighter.id}>
