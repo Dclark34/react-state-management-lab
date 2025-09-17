@@ -105,12 +105,12 @@ const handleFighter = (pickedFighter) => {
   const newTeam = [...team, pickedFighter];
   setTeam(newTeam); //ADD A MEMBER TO THE TEAM.
   console.log(newTeam);
-  const updateFighters = zombieFighters.filter(fighter => fighter.id !== pickedFighter.id);//remove fighter function. fighter is a passed object. states it cant be the same to your picked fighter (id).
+  const updateFighters = zombieFighters.filter(fighter => fighter.id !== pickedFighter.id);
+  //remove fighter function. what is happening is that for each fighter in zombiefighter array, it will remove items that pass our
+  //truthy test (aka returns true in callback). so for each fighter, if the fighterid is NOT equal to the id of our pickedfighter.id (the object we passed), 
+  // then it returns an array with those fighters.
   setZombieFighters(updateFighters);
 }
-
-
-
 
 
 
@@ -119,8 +119,22 @@ const handleFighter = (pickedFighter) => {
   return (
     <>
     <h1>Zombie Fighter!</h1>
-    {/* START HERE STEP 7 in HW: Need a ternerary that checks if setTeam is empty. If it is, display message: add team members. 
-    IF not, displays UI with chosen team members. Above or below choices? */}
+    {team.length > 0 ? (
+     <> 
+     <h2>Your Team: </h2>
+    <ul>
+      {team.map((fighter) => (
+        <li key={fighter.id}>
+          <div>
+            <img src={fighter.img} />
+            <p>{fighter.name}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+    </>) 
+    : ( <h2>"Pick Your Team"</h2> )}
+
     <h3>Money Left: <span>{money}</span></h3>
     <ul>
       {zombieFighters.map((fighter) => (
