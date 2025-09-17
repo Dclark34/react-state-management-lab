@@ -1,10 +1,12 @@
 #root {
   margin: 16px;
+  text-align: center;
 }
 
 ul {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 li {
@@ -13,4 +15,9 @@ li {
   padding: 8px;
   border: whitesmoke 3px solid;
   border-radius: 8px;
+}
+
+#add-button{
+  color: rgb(255, 255, 255);
+  background-color: rgb(39, 85, 125);
 }
